@@ -1,0 +1,6 @@
+string topic
+string[] classes
+int32[] bboxes
+---
+int32[] bboxes
+string[] classes

@@ -1,0 +1,6 @@
+string topic
+bool merge_box
+---
+string[] classes
+float64[] unc
+int64[] bboxes

@@ -1,0 +1,76 @@
+<launch>
+
+  <arg name="robot_name" default="kinova"/>
+  <arg name="object_name" default="avocado"/>
+  <arg name="object_origin" default="[0.6, 0, 0.2]"/>
+  <arg name="camera_used" default="0"/>
+  <arg name="marker_offset" default="0.17"/>
+
+  <arg name="FPS" default="false"/>
+  <arg name="num_of_points" default="1000"/>
+  <arg name="level" default="0"/>
+  <arg name="free_space" default="false"/>
+
+  <param name="/IGR/config_read" value="false"/>
+
+  <param name="robot_name" value="$(arg robot_name)"/>
+  <param name="object_name" value="$(arg object_name)"/>
+  <param name="object_origin" value="$(arg object_origin)"/>
+  <param name="real_setup" value="true"/>
+  <param name="use_sim_time" value="false"/>
+  <param name="camera_used" value="$(arg camera_used)"/>
+
+  <include file="$(find gen3_robotiq_2f_85_move_it_config)/launch/planning_context.launch">
+      <arg name="printed_finger" value="false"/>
+      <arg name="load_robot_description" value="true"/>
+  </include>
+
+  <!-- start Kortex driver -->
+  <include file="$(find kortex_driver)/launch/kortex_driver.launch">
+
+    <arg name="ip_address" value="192.168.1.10"/>
+    <arg name="start_rviz" value="true"/>
+    <arg name="robot_name" value="$(arg robot_name)"/>
+  </include>
+
+  <node pkg="tf" type="static_transform_publisher" name="camera_link0_broadcaster" args="1.135 0.0775 0.26 -0.0825 -0.0075 0.95 -0.005 base_link camera_0_link 10" />
+
+  <remap from="/camera_0/color/image_raw" to="/table_camera/rgb"/>
+  <remap from="/camera_0/aligned_depth_to_color/image_raw" to="/table_camera/depth"/>
+  <remap from="/camera_0/aligned_depth_to_color/camera_info" to="/table_camera/camera_info_depth"/>
+  <remap from="/camera_0/depth/color/points" to="/table_camera/pcl"/>
+
+
+    <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+        <arg name="serial_no" value="SERIAL_NUMBER"/>
+        <arg name="enable_pointcloud" value="true"/>
+        <arg name="initial_reset" value="true"/>
+        <arg name="align_depth" value="true"/>
+        <arg name="enable_sync" value="true"/>
+    </include>
+
+
+
+  <node name="finger_tf_broadcaster" pkg="kinova_mujoco" type="finger_tf.py" respawn="true" output="screen"/>
+  <node name="parametrize_cartesian_path_server" pkg="shape_completion" type="parametrize_cartesian_path_service" respawn="true" output="screen"/>
+  <node name="smooth_pcl_server" pkg="shape_completion" type="smooth_pcl_service" respawn="true" output="screen"/>
+
+  <node name="reconstruction_shower" pkg="shape_completion" type="rec_mesh_publisher.py" respawn="true" output="screen"/>
+  <node name="arrow_shower" pkg="shape_completion" type="arrows.py" respawn="true" output="screen"/>
+  <node name="new_pc_node" pkg="shape_completion" type="new_pc_vis.py" respawn="true" output="screen"/>
+  <node name="free_space_node" pkg="shape_completion" type="free_space_vis.py" respawn="true" output="screen"/>
+  <node name="IGR_node" pkg="igr" type="main.py" respawn="true" output="screen" args="-f $(arg FPS) -fs $(arg free_space) -p $(arg num_of_points) -l $(arg level)"/>
+  <node name="call_yolo_node" pkg="yolo" type="call_yolo_service.py" respawn="true" output="screen" args="--weights ycbreal.pt --device cpu"/>
+
+  <include file="$(find rgbd_segmentation)/launch/rgbd_segmentation.launch">
+      <arg name="rgb_topic" value="/table_camera/rgb"/>
+      <arg name="depth_topic" value="/table_camera/depth"/>
+      <arg name="depth_camera_info_topic" value="/table_camera/camera_info_depth"/>
+      <arg name="rgb_camera_info_topic" value="/table_camera/camera_info_depth"/>
+      <arg name="debug" value="False"/>
+      <arg name="units" value="1000"/>
+      <arg name="floodfill_change" value="0.005"/>
+      <arg name="segmentation_z" value="[0.005, 0.35]"/>
+      <arg name="segmentation_x" value="[0.25, 2.0]"/>
+  </include>
+</launch>

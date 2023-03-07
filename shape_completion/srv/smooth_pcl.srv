@@ -1,0 +1,6 @@
+float64[] points
+float64 leaf_size
+float64 smooth_factor
+string method
+---
+float64[] points

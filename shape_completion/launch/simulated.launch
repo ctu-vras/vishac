@@ -1,0 +1,79 @@
+<launch>
+
+    <arg name="object_name" default="avocado"/>
+    <arg name="object_origin" default="[0.6, 0, 0.2]"/>
+    <arg name="printed_finger" default="false"/>
+    <arg name="convex_decomp" default="false"/>
+    <arg name="rviz" default="true"/>
+    <arg name="mujoco" default="false"/>
+
+    <arg name="FPS" default="false"/>
+    <arg name="num_of_points" default="1000"/>
+    <arg name="level" default="0"/>
+    <arg name="free_space" default="false"/>
+
+    <param name="/IGR/config_read" value="false"/>
+
+    <param name="use_sim_time" value="false"/>
+    <group unless="$(arg printed_finger)">
+        <param name="left_inner_finger_joint_init" value="-0.778" />
+        <param name="right_inner_knuckle_joint_init" value="0.83" />
+        <param name="finger_joint_init" value="0.83" />
+        <param name="right_inner_finger_joint_init" value="-0.787" />
+        <param name="left_inner_knuckle_joint_init" value=" 0.815" />
+        <param name="right_outer_knuckle_joint_init" value="0.827" />
+    </group>
+    <group if="$(arg printed_finger)">
+        <param name="left_inner_finger_joint_init" value="0.0" />
+        <param name="right_inner_knuckle_joint_init" value="0.0" />
+        <param name="finger_joint_init" value="0.0" />
+        <param name="right_inner_finger_joint_init" value="0.0" />
+        <param name="left_inner_knuckle_joint_init" value="0.0" />
+        <param name="right_outer_knuckle_joint_init" value="0.0" />
+    </group>
+
+    <param name="joint_1_init" value="1.383"/>
+    <param name="joint_2_init" value="-0.074"/>
+    <param name="joint_3_init" value="-0.074"/>
+    <param name="joint_4_init" value="0.165"/>
+    <param name="joint_5_init" value="-0.314"/>
+    <param name="joint_6_init" value="-0.102"/>
+    <param name="joint_7_init" value="0.849"/>
+
+    <remap from="/kinova_mujoco/rgb" to="/table_camera/rgb"/>
+    <remap from="/kinova_mujoco/depth" to="/table_camera/depth"/>
+    <remap from="/kinova_mujoco/camera_info" to="/table_camera/camera_info_depth"/>
+    <remap from="/kinova_mujoco/points" to="/table_camera/pcl"/>
+    <node name="camera_rgb_throttler" pkg="topic_tools" type="throttle" args="messages table_camera/rgb 0.5 rgb_th" respawn="true" output="screen"/>
+    <node name="camera_depth_throttler" pkg="topic_tools" type="throttle" args="messages table_camera/depth 0.5 depth_th" respawn="true" output="screen"/>
+
+    <param name="compensate_bias" value="true"/>
+    <param name="show_full_torques" value="true"/>
+    <include file="$(find kinova_mujoco)/launch/table_simulation_generated.launch">
+        <arg name="object_name" value="$(arg object_name)"/>
+        <arg name="object_origin" value="$(arg object_origin)"/>
+        <arg name="printed_finger" value="$(arg printed_finger)"/>
+        <arg name="convex_decomp" value="$(arg convex_decomp)"/>
+        <arg name="rviz" value="$(arg rviz)"/>
+        <arg name="mujoco" value="$(arg mujoco)"/>
+    </include>
+
+    <node name="reconstruction_shower" pkg="shape_completion" type="rec_mesh_publisher.py" respawn="true" output="screen"/>
+    <node name="arrow_shower" pkg="shape_completion" type="arrows.py" respawn="true" output="screen"/>
+    <node name="new_pc_node" pkg="shape_completion" type="new_pc_vis.py" respawn="true" output="screen"/>
+    <node name="free_space_node" pkg="shape_completion" type="free_space_vis.py" respawn="true" output="screen"/>
+    <node name="IGR_node" pkg="igr" type="main.py" respawn="true" output="screen" args="-f $(arg FPS) -fs $(arg free_space) -p $(arg num_of_points) -l $(arg level)"/>
+    <node name="classification_node" pkg="shape_completion" type="simulation_classification.py" respawn="true" output="screen"/>
+
+    <include file="$(find rgbd_segmentation)/launch/rgbd_segmentation.launch">
+        <arg name="rgb_topic" value="/table_camera/rgb"/>
+        <arg name="depth_topic" value="/table_camera/depth"/>
+        <arg name="depth_camera_info_topic" value="/table_camera/camera_info_depth"/>
+        <arg name="rgb_camera_info_topic" value="/table_camera/camera_info_depth"/>
+        <arg name="debug" value="false"/>
+        <arg name="units" value="1"/>
+        <arg name="floodfill_change" value="0.0015"/>
+        <arg name="segmentation_z" value="[0.005, 0.35]"/>
+    </include>
+
+</launch>

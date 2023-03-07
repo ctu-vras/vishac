@@ -1,0 +1,6 @@
+int32[] bboxes
+---
+float32[] pointclouds
+int32[] pointclouds_len
+int64[] colors
+int32[] colors_len

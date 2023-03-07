@@ -1,0 +1,8 @@
+{
+"objects": [["003_cracker_box", "001_chip_can"], ["003_cracker_box", "021_bleach_cleanser"], ["005_tomato_soup_can", "drill_box"], ["004_sugar_box", "019_pitcher_base", "021_bleach_cleanser"], ["021_bleach_cleanser", "035_power_drill", "001_chip_can"]],
+"origins": [[[0.6, -0.15, 0], [0.6, 0.15, 0]], [[0.6, -0.15, 0], [0.6, 0.15, 0]], [[0.6, -0.15, 0], [0.6, 0.05, 0]], [[0.6, -0.15, 0], [0.6, 0, 0], [0.6, 0.15, 0]], [[0.6, -0.15, 0], [0.6, 0, 0], [0.6, 0.15, 0]]],
+"repetitions": [3, 3, 3, 3, 3],
+"reconstructions": [15, 15, 15, 15, 15],
+"max_time": [1000, 1000, 1000, 1000, 1000]
+}
+

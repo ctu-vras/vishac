@@ -1,0 +1,14 @@
+*idea*
+*.stl
+*.pyc
+*.ply
+*.pcd
+*.npy
+*.npz*
+*.binvox*
+*.bag*
+*ipynb*
+*.zip*
+*.xyz
+*__pycache__*
+

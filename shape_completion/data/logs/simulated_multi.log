@@ -1,0 +1,16 @@
+timestamp;objects;(number of reconstructions,max_time,number of repetitions);repetition;time
+2023-02-23-09-52-46-128804;003_cracker_box,001_chip_can;(15,1000,3);1;489.871165
+2023-02-23-10-37-43-848805;003_cracker_box,001_chip_can;(15,1000,3);2;380.853625
+2023-02-23-11-13-25-778359;003_cracker_box,001_chip_can;(15,1000,3);3;416.002495
+2023-02-23-11-43-23-264831;003_cracker_box,021_bleach_cleanser;(15,1000,3);1;332.647579
+2023-02-23-12-04-27-665116;003_cracker_box,021_bleach_cleanser;(15,1000,3);2;376.056549
+2023-02-23-12-59-48-076924;003_cracker_box,021_bleach_cleanser;(15,1000,3);3;364.303326
+2023-02-23-14-02-39-088850;005_tomato_soup_can,drill_box;(15,1000,3);1;424.242037
+2023-02-23-14-10-13-381669;005_tomato_soup_can,drill_box;(15,1000,3);2;337.729832
+2023-02-23-15-18-41-028862;005_tomato_soup_can,drill_box;(15,1000,3);3;413.539328
+2023-02-23-21-19-19-769129;004_sugar_box,019_pitcher_base,021_bleach_cleanser;(15,1000,3);1;454.269345
+2023-02-23-22-45-03-620817;004_sugar_box,019_pitcher_base,021_bleach_cleanser;(15,1000,3);2;481.041429
+2023-02-23-23-15-42-544922;004_sugar_box,019_pitcher_base,021_bleach_cleanser;(15,1000,3);3;878.023635
+2023-02-24-00-37-48-536828;021_bleach_cleanser,035_power_drill,001_chip_can;(15,1000,3);1;492.381578
+2023-02-24-01-09-07-008829;021_bleach_cleanser,035_power_drill,001_chip_can;(15,1000,3);2;449.401979
+2023-02-24-02-18-24-018512;021_bleach_cleanser,035_power_drill,001_chip_can;(15,1000,3);3;469.973601

@@ -1,0 +1,38 @@
+<launch>
+    <arg name="rgb_topic" default="/camera/color/image_raw"/>
+    <arg name="depth_topic" default="/camera/aligned_depth_to_color/image_raw"/>
+    <arg name="depth_camera_info_topic" default="/camera/aligned_depth_to_color/camera_info"/>
+    <arg name="base_link" default="base_link"/>
+    <arg name="rate" default="1"/>
+    <arg name="publish_point_cloud" default="true"/>
+    <arg name="floodfill_change" default="0.002"/>
+    <arg name="debug" default="false"/>
+    <arg name="segmentation_x" default="-1"/>
+    <arg name="segmentation_y" default="-1"/>
+    <arg name="segmentation_z" default="-1"/>
+    <arg name="units" default="1000"/>
+    <arg name="align_depth" default="false"/>
+    <arg name="rgb_camera_info_topic" default="/camera/color/camera_info"/>
+
+    <group ns="rgbd_segmentation">
+        <param name="rgb_topic" value="$(arg rgb_topic)"/>
+        <param name="depth_topic" value="$(arg depth_topic)"/>
+        <param name="depth_camera_info_topic" value="$(arg depth_camera_info_topic)"/>
+        <param name="base_link" value="$(arg base_link)"/>
+        <param name="rate" value="$(arg rate)"/>
+        <param name="publish_point_cloud" value="$(arg publish_point_cloud)"/>
+        <param name="floodfill_change" value="$(arg floodfill_change)"/>
+        <param name="debug" value="$(arg debug)"/>
+        <param name="segmentation_x" value="$(arg segmentation_x)"/>
+        <param name="segmentation_y" value="$(arg segmentation_y)"/>
+        <param name="segmentation_z" value="$(arg segmentation_z)"/>
+        <param name="units" value="$(arg units)"/>
+        <param name="meshes_paths" value="false"/>
+        <param name="align_depth" value="$(arg align_depth)"/>
+        <param name="rgb_camera_info_topic" value="$(arg rgb_camera_info_topic)"/>
+    </group>
+
+    <node if="$(arg publish_point_cloud)" name="point_cloud_publisher" pkg="rgbd_segmentation" type="publish_point_cloud.py" respawn="true" output="screen"/>
+    <node name="segmentation_node" pkg="rgbd_segmentation" type="segment.py" respawn="true" output="screen"/>
+
+</launch>
