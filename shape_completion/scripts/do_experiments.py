@@ -164,7 +164,7 @@ if __name__ == "__main__":
 
     FPS = "true"
     free_space = "true"
-    num_of_points = "10"
+    num_of_points = "500"
     level = "0"
 
     for objects, origins, rec_num, max_time, repetitions in zip(exp_setup["objects"], exp_setup["origins"], exp_setup["reconstructions"], exp_setup["max_time"], exp_setup["repetitions"]):

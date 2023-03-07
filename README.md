@@ -58,7 +58,7 @@ The image is available at: [Docker hub](https://hub.docker.com/repository/docker
         git clone https://github.com/ctu-vras/vishac.git
         mv vishac src
 
- 4. Use the provided script [run.sh](Docker/run.sh)
+ 4. Use the provided script [run.sh](Docker/run.sh) with `xhost local:root`
     - the script takes 2 mandatory parameters:
        - name of the container
          - string
@@ -68,7 +68,10 @@ The image is available at: [Docker hub](https://hub.docker.com/repository/docker
          - should be: `some_path/VISHAC` from the previous step
     - optional parameter 'cpu' can be use to run the container in CPU
       only mode 
-    - *e.g.*, `./run.sh vishac /home/my_user/VISHAC`
+    - *e.g.*, `xhost local:root && ./run.sh vishac /home/my_user/VISHAC`
+      -  If you run it non-linux enviroment, running over SSH or it doesnt work, run: `vnc && start-vnc-server.sh` inside the docker container.  This will open VNC server inside the container,
+         and you can access it through your browser at: `http://ip_address:6080`. Where ip_address is `localhost` if you run it on local machine, or ip address of a remote machine.
+
  5. Now, when you are in the docker environment, build the workspace:
   
         cd some_path/VISHAC
@@ -76,6 +79,7 @@ The image is available at: [Docker hub](https://hub.docker.com/repository/docker
         catkin init
         catkin build
         source devel/setup.bash
+
 
 ### Manual installation
 
