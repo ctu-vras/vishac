@@ -97,8 +97,9 @@ Data are available at [OSF.io platform](https://osf.io/j6rkd/).
 and extract them to [kinova_mujoco/GT_meshes](kinova_mujoco/GT_meshes).
 
 - If you want to use data collected during our experiments,
-  [meshes](), [point cloud](), [logs](), [rosbags](), [metrics]()
-  and [numpy files]() are available to download as well. Also,
+  [meshes](https://osf.io/j6rkd/files/osfstorage/64085ae686049004a1086d95), [point clouds](https://osf.io/j6rkd/files/osfstorage/64085b29c74723049d10b1e4),
+  [logs](https://osf.io/j6rkd/files/osfstorage/64085a80e25636048e231f17), [rosbags](https://osf.io/j6rkd/files/osfstorage/640869b0e256360497231d26), [metrics](https://osf.io/j6rkd/files/osfstorage/64085a82c7472304a010aed7)
+  and [numpy files](https://osf.io/j6rkd/files/osfstorage/64085b9d86049004a1086f3e) are available to download as well. Also,
   experiments files used are available in [exps](shape_completion/data/exps)
   directory.
 
@@ -165,7 +166,7 @@ robot. The code contains parameter _real_setup_,
 which control behaviour of some functions. 
 
 You can get inspired from
-[real.launch](shape_completion/launch/real.lauch),
+[real.launch](shape_completion/launch/real.launch),
 that was used for real experiments with Kinova Gen3, with
 Robotiq 2F-85 gripper and Intel D435 camera.
 
