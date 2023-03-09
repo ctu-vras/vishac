@@ -16,6 +16,7 @@ This repository includes code for *Efficient Visuo-Haptic Object Shape Completio
  - [Data](#data)
  - [Run](#run)
  - [Real Setup](#real-setup)
+ - [Publication / citing](#publication)
  - [Acknowledgements](#acknowledgements)
 
 ## Licensing
@@ -98,7 +99,7 @@ and extract them to [kinova_mujoco/GT_meshes](kinova_mujoco/GT_meshes).
 
 - If you want to use data collected during our experiments,
   [meshes](https://osf.io/j6rkd/files/osfstorage/64087dae86049004c308738c), [point clouds](https://osf.io/j6rkd/files/osfstorage/64085b29c74723049d10b1e4),
-  [logs](https://osf.io/j6rkd/files/osfstorage/64085a80e25636048e231f17), [rosbags](https://osf.io/j6rkd/files/osfstorage/640869b0e256360497231d26), [metrics](https://osf.io/j6rkd/files/osfstorage/64085a82c7472304a010aed7)
+  [logs](https://osf.io/j6rkd/files/osfstorage/64085a80e25636048e231f17), [rosbags](https://osf.io/j6rkd/files/osfstorage/640869b0e256360497231d26), [metrics]([https://osf.io/j6rkd/files/osfstorage/64085a82c7472304a010aed7](https://osf.io/j6rkd/files/osfstorage/6408a98086049004ed08693e))
   and [numpy files](https://osf.io/j6rkd/files/osfstorage/64085b9d86049004a1086f3e) are available to download as well. Also,
   experiments files used are available in [exps](shape_completion/data/exps)
   directory.
@@ -170,7 +171,13 @@ You can get inspired from
 that was used for real experiments with Kinova Gen3, with
 Robotiq 2F-85 gripper and Intel D435 camera.
 
+## Publication
+This repository is connected to the following publication:
 
+Rustler, L., Matas, J.,  & Hoffmann, M. (2023). 'Efficient Visuo-Haptic Object Shape Completion for Robot Manipulation
+'. [[DOI]](https://doi.org/10.48550/ARXIV.2303.04700)
+
+If you use the code or data in this repository, please cite this article.
 
 ## Acknowledgements
 This work was supported by the OP VVV MEYS funded project
