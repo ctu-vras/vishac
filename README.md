@@ -174,10 +174,13 @@ Robotiq 2F-85 gripper and Intel D435 camera.
 ## Publication
 This repository is connected to the following publication:
 
-Rustler, L., Matas, J.,  & Hoffmann, M. (2023). 'Efficient Visuo-Haptic Object Shape Completion for Robot Manipulation
-'. [[DOI]](https://doi.org/10.48550/ARXIV.2303.04700)
+Rustler, L., Matas, J., & Hoffmann, M. (2023). 'Efficient Visuo-Haptic Object Shape Completion for Robot Manipulation
+'. In Intelligent Robots and Systems (IROS), IEEE/RSJ International Conference on. [[DOI]](https://doi.org/10.48550/ARXIV.2303.04700)
 
 If you use the code or data in this repository, please cite this article.
+
+## Video
+A video accompanying the article is availabe on [[youtube]](https://youtu.be/V5mNKDACetA).
 
 ## Acknowledgements
 This work was supported by the OP VVV MEYS funded project
